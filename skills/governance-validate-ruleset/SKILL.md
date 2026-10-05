@@ -12,7 +12,7 @@ description: Use when checking a custom MuleSoft API Governance ruleset's dialec
    anypoint-cli-v4 governance:ruleset:validate-authoring path/to/ruleset.yaml
    ```
 
-   The first command checks Validation Profile dialect conformance. The second checks model classes, paths, constraints, and severities when available in your CLI version. Fix every error before continuing.
+   The first command checks Validation Profile dialect conformance. The second checks model classes, paths, constraints, and severities when available in your CLI version. Fix every error before continuing. For authoring changes, run `governance:ruleset:simplify path/to/ruleset.yaml`, inspect its output, and repeat both validations if you apply the simplification. Keep one spec kind per ruleset.
 2. Prepare an API project folder or ZIP with a **passing** and a **failing** spec variant. Validate each with the local ruleset:
 
    ```sh
@@ -27,4 +27,5 @@ description: Use when checking a custom MuleSoft API Governance ruleset's dialec
 
 - [Validating custom rulesets](https://docs.mulesoft.com/api-governance/custom-rulesets-validate-and-publish)
 - [Anypoint CLI 4.x API validation reference](https://docs.mulesoft.com/anypoint-cli/latest/api-governance#governance-api-validate)
+- [MuleSoft ruleset authoring skill](https://dev-portal.mulesoft.com/skills/mule-development/author-governance-ruleset/SKILL.md)
 - Snapshot: 2026-10-05

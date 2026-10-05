@@ -19,7 +19,7 @@ description: Use when cloning a local or Exchange-published MuleSoft API Governa
    anypoint-cli-v4 governance:ruleset:clone group-id/asset-id/version 'Team Ruleset' 'Customized standards' --remote --remove=rule-id > team-ruleset.yaml
    ```
 
-3. Run `governance:ruleset:info team-ruleset.yaml` and compare rule IDs and severities with the original; review the YAML to ensure only intended changes. Do not treat a disabled rule as merely downgraded.
+3. Run `governance:ruleset:info team-ruleset.yaml` and compare rule IDs and severities with the original; review the YAML to ensure only intended changes. Do not treat a disabled rule as merely downgraded. Run `governance:ruleset:validate-authoring team-ruleset.yaml` after any manual changes; simplify, review the output, and revalidate if you apply it.
 4. Validate the new ruleset and exercise positive/negative API examples with `governance-validate-ruleset`. Publish with `governance-publish-ruleset` only after review, using your **own** Exchange asset ID and version.
 
 ## Source Ref
