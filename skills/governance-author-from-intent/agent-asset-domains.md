@@ -34,8 +34,25 @@ its binary:
 
 ## MCP manifests (`mcp-metadata`)
 
-- Write `core.*` property paths, such as `core.description`. `mcp.*` paths pass both static
-  checks but match the wrong node at runtime.
+- Paths depend on the plugin version, and hosted Anypoint governance runs 1.1.x. Since plugin
+  1.1.x, fields of MCP elements (tool, resource, prompt, tool input schema, tool annotations,
+  prompt argument) are `mcp.*`, for example `mcp.description` or `mcp.annotations`. Plugin 1.0.x
+  named them `core.*`. Fields of the manifest root stay `core.*` (`core.securitySchemes`,
+  `core.transport`, `core.tools`). A ruleset written for one version reports false findings on
+  compliant manifests under the other, so require plugin 1.1.4 or later in the harness. Both
+  static checks accept either prefix.
+- The manifest root is typed `core:encodes`, never `mcp:Server`, so a rule on `mcp.Server` never
+  runs. Target `core.encodes`. `validate-authoring` reports `Invalid targetClass` for it (its MCP
+  metadata is stale); allowlist exactly that error in the harness. A2A Agent Cards share
+  `core.encodes`, so guard every root rule with `if: propertyConstraints: core.transport:
+  minCount: 1`. The MCP schema requires `transport`, and cards don't have it. Add A2A v1.0 and
+  v0.3 cards as scope fixtures that must produce 0 findings.
+- Exchange accepts an MCP asset published without an `mcp-metadata.json` and stores a stub with
+  only the transport. Every element rule then passes because no element exists. Add a root
+  presence rule: an `or:` of `core.tools`, `core.resources` and `core.prompts`, each with
+  `minCount: 1`.
+- `in: [false]` on `mcp.additionalProperties` (with `minCount: 1`) is the only way to require
+  closed tool inputs. `validate-authoring` warns about `in` on a node, but it works at runtime.
 - Declare `prefixes: { mcp: http://anypoint.com/vocabs/mcp# }`. Without it the validator panics
   at runtime, and neither static check notices.
 - Per-parameter rules can't be expressed. `JsonSchemaProperty` is never instantiated, and

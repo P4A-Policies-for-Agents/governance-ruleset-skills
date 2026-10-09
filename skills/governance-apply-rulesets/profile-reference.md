@@ -73,6 +73,9 @@ does not expose this; use `governance-customize-ruleset` to clone instead.
 - Overall precedence: NonConformant, then Pending, then Failed, then Conformant.
 - **Only `violation` results make an API nonconformant.** Warnings and info are reported but leave it
   conformant. Moving a rule from `violation` to `warning` therefore changes conformance.
+- The asset page's Conformance tab shows "No errors found" for any conformant report, hiding its
+  warnings and info. The governance console's per-ruleset table shows warning and info counts, so
+  check warning- and info-only test fixtures there. The CSV export lists only pass/fail per ruleset.
 - Fixing the spec requires republishing a new API version; instance data is fixed in API Manager;
   catalog data in Exchange.
 
