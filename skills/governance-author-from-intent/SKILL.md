@@ -24,7 +24,9 @@ The CLI's `generate` command returns **context and instructions**, not a finishe
    anypoint-cli-v4 governance:ruleset:constraints --type scalar
    ```
 
-3. Write the Validation Profile 1.0 YAML against the discovered model. Start with `#%Validation Profile 1.0` on line 1; declare `profile`, `validations`, and a `propertyConstraints` entry for each rule, and assign every rule to `violation`, `warning`, or `info`. Use only constraints compatible with the **last** property in a nested path (`scalar`, `node`, `scalarArray`, or `nodeArray`), and declare non-default namespace prefixes. Use the [AMF validation tutorial](https://github.com/aml-org/amf-custom-validator/blob/develop/docs/validation_tutorial/validation.md) for the actual dialect structure. If an editor supports it, `governance:ruleset:completions path/to/ruleset.yaml --offset <cursor-offset> --line-text '    targetClass: '` provides contextual suggestions.
+   **For MCP server manifests or A2A Agent Cards, read [agent-asset-domains.md](agent-asset-domains.md) before writing YAML.** It covers the fixture `classifier`, required prefixes, the paths that pass every static check but are wrong at runtime, snake_case alias paths, and per-element targeting.
+
+3. Write the Validation Profile 1.0 YAML against the discovered model. Start with `#%Validation Profile 1.0` on line 1; declare `profile`, `validations`, and a `propertyConstraints` entry for each rule, and assign every rule to `violation`, `warning`, or `info`. Use only constraints compatible with the **last** property in a nested path (`scalar`, `node`, `scalarArray`, or `nodeArray`), and declare non-default namespace prefixes. `in:` ignores missing values, so pair it with `minCount: 1` when the field is required; `maxCount: 0` forbids a field. Use the [AMF validation tutorial](https://github.com/aml-org/amf-custom-validator/blob/develop/docs/validation_tutorial/validation.md) for the actual dialect structure. If an editor supports it, `governance:ruleset:completions path/to/ruleset.yaml --offset <cursor-offset> --line-text '    targetClass: '` provides contextual suggestions.
 4. Run both checks, then test against a passing and a failing API (see `governance-validate-ruleset`):
 
    ```sh
@@ -39,4 +41,5 @@ The CLI's `generate` command returns **context and instructions**, not a finishe
 - [Anypoint CLI 4.x governance authoring commands](https://docs.mulesoft.com/anypoint-cli/latest/api-governance)
 - [Creating completely new custom rulesets](https://docs.mulesoft.com/api-governance/custom-rulesets-new)
 - [MuleSoft ruleset authoring skill](https://dev-portal.mulesoft.com/skills/mule-development/author-governance-ruleset/SKILL.md)
-- Snapshot: 2026-10-05
+- MCP and A2A behavior in `agent-asset-domains.md`: verified against governance plugin 1.0.21 and 1.1.4
+- Snapshot: 2026-10-09
