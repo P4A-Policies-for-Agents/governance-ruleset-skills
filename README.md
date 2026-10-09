@@ -28,5 +28,7 @@ Derived from the [API Governance documentation index](https://docs.mulesoft.com/
 [Anypoint CLI 4.x governance reference](https://docs.mulesoft.com/anypoint-cli/latest/api-governance).
 Reviewed on 2026-10-05. The MCP and A2A notes in
 `skills/governance-author-from-intent/agent-asset-domains.md` were verified by running fixtures
-with governance plugin 1.0.21 and 1.1.4 on 2026-10-09. The documentation is updated independently of this repository; check the
+with governance plugin 1.0.21 and 1.1.4 on 2026-10-09. Other CLI, publish, and profile behavior
+notes (`rule-patterns.md`, `profile-reference.md`, and the skill bodies) reflect governance plugin
+1.1.4 as of 2026-10-09; re-check them after a plugin upgrade. The documentation is updated independently of this repository; check the
 linked page before relying on version-sensitive commands.
