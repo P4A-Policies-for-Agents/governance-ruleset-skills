@@ -50,7 +50,8 @@ its binary:
   `api.Project → api.contract / doc.encodes → card`.
 - `core.encodes`, `core.provider`, `core.capabilities` and `core.flows` also exist in MCP
   manifests and v0.3 cards. A card-level rule must target `api.Project` and be guarded by the
-  classifier. These findings are reported on the asset and have no source line.
+  classifier. These findings are reported on the asset and have no source line. `core` and `doc` are
+  built-in prefixes. Declare only `api` and `catalog`, plus any `snake*` prefixes.
 
   ```yaml
   prefixes:
